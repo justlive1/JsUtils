@@ -34,4 +34,5 @@
 		return smear((o == null) ? 0 : hash(o));
 	};
 
+	
 })(window);
