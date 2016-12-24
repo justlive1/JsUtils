@@ -1,5 +1,5 @@
 /**
- * 
+ * @fileOverview 可以保存重复的键值对
  */
 function ListMultimap() {
 

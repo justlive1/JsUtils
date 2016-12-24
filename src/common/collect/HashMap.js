@@ -1,7 +1,5 @@
 /**
  * @fileOverview HashMap
- * @author qq11419041@163.com
- * @copyright 2015-12-01
  */
 function HashMap(initialCapacity, initloadFactor) {
 
