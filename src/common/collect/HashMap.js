@@ -14,7 +14,7 @@ function HashMap(initialCapacity, initloadFactor) {
 
 	var _this = this;
 
-	this.modCount = 0;
+	var modCount = 0;
 
 	var table = new Array(threshold);
 
