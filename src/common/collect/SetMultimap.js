@@ -1,7 +1,7 @@
 /**
  * @fileOverview 可以保存重复的键值对
  */
-function ListMultimap() {
+function SetMultimap() {
 
 	var map = new HashMap();
 
@@ -44,7 +44,7 @@ function ListMultimap() {
 			totalSize++;
 			map.put(key, collection);
 			return true;
-		} else {
+		} else if(collection.indexOf(value) == -1){
 			collection.push(value);
 			totalSize++;
 			return true;
@@ -79,8 +79,8 @@ function ListMultimap() {
 		if (collection == null) {
 			map.put(key, values);
 		} else {
-			collection = collection.concat(values);
-			map.put(key, collection);
+			collection = unique(collection.concat(values));
+			map.put(key,collection);
 		}
 		totalSize += values.length;
 	};
@@ -122,5 +122,17 @@ function ListMultimap() {
 		}
 		return values;
 	};
+	
+	function unique(arr){
+		
+		var result = [], hash = {};
+	    for (var i = 0, elem; (elem = arr[i]) != null; i++) {
+	        if (!hash[elem]) {
+	            result.push(elem);
+	            hash[elem] = true;
+	        }
+	    }
+	    return result;
+	}
 
 }
