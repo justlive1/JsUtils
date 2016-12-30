@@ -7,6 +7,12 @@ function ArrayDeque() {
 
 	var head = 0, tail = 0;
 
+	function copyElements(ori, orid, dis, disd, length) {
+		for (var i = 0; i < length; i++) {
+			dis[disd + i] = ori[orid + i];
+		}
+	}
+
 	function doubleCapacity() {
 		var p = head;
 		var n = elements.length;
@@ -14,24 +20,19 @@ function ArrayDeque() {
 		var newCapacity = n << 1;
 		var a = new Array(newCapacity);
 
-		for(var i=0;i<n;i++){
-			if(i<p){
-				a[r+i]=elements[i];
-			}else{
-				a[i-p]=elements[i];
-			}
-		}
-		
+		copyElements(elements, p, a, 0, r);
+		copyElements(elements, 0, a, r, p);
+
 		elements = a;
-        head = 0;
-        tail = n;
+		head = 0;
+		tail = n;
 	}
 
 	this.addFirst = function(e) {
 		if (e == null) {
 			return false;
 		}
-		
+
 		elements[head = (head - 1) & (elements.length - 1)] = e;
 
 		if (head == tail) {
@@ -49,7 +50,7 @@ function ArrayDeque() {
 		}
 	};
 
-	this.removeFirst = function() {
+	this.pollFirst = function() {
 		var h = head;
 		var result = elements[h];
 		if (result == null) {
@@ -61,7 +62,7 @@ function ArrayDeque() {
 		return result;
 	};
 
-	this.removeLast = function() {
+	this.pollLast = function() {
 		var t = (tail - 1) & (elements.length - 1);
 		var result = elements[t];
 		if (result == null)
@@ -86,5 +87,34 @@ function ArrayDeque() {
 	this.isEmpty = function() {
 		return head == tail;
 	};
-	
+
+	this.contains = function(o) {
+		if (o == null) {
+			return false;
+		}
+		var mask = elements.length - 1;
+		var i = head;
+		var x;
+		while ((x = elements[i]) != null) {
+			// TODO collection
+			if (o === x) {
+				return true;
+			}
+			i = (i + 1) & mask;
+		}
+		return false;
+	};
+
+	this.toArray = function() {
+		var a = new Array(this.size());
+		if (head < tail) {
+			copyElements(elements, head, a, 0, this.size());
+		} else if (head > tail) {
+			var headPortionLen = elements.length - head;
+			copyElements(elements, head, a, 0, headPortionLen);
+			copyElements(elements, 0, a, headPortionLen, tail);
+		}
+		return a;
+	};
+
 }
