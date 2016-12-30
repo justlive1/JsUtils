@@ -31,9 +31,8 @@ function ArrayDeque() {
 		if (e == null) {
 			return false;
 		}
-		var index = (head = (head - 1)) & (elements.length - 1);
-		console.log(index);
-		elements[index] = e;
+		
+		elements[head = (head - 1) & (elements.length - 1)] = e;
 
 		if (head == tail) {
 			doubleCapacity();
@@ -88,5 +87,4 @@ function ArrayDeque() {
 		return head == tail;
 	};
 	
-
 }
