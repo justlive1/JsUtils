@@ -1,0 +1,25 @@
+{
+	"name": "JsUtils",
+	"description": "utils for javascript",
+	"version": "1.0.0",
+	"main": "jsutils.js",
+	"dependencies": {
+	
+	},
+	"devDependencies": {
+		
+	},
+	"scripts": {
+		"start": "node jsutils.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/justlive1/JsUtils.git"
+	},
+	"author": "justlive1",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/justlive1/JsUtils/issues"
+	},
+	"homepage": "https://github.com/justlive1/JsUtils"
+}
