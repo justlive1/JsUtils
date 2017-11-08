@@ -18,7 +18,7 @@
 		function calcPages() {
 			pageCount = Math.ceil(total / pageSize);
 			pages = [];
-			if(pageCount < 2) {
+			if(pageCount < 2 || !hasPageIndex) {
 				return;
 			}
 			if(current < 1) {
@@ -71,8 +71,8 @@
 		function render() {
 			calcPages();
 			var html = '<div class="pagination">'
+			html += '<ul class="pagination-list"><li data-page="' + (current - 1) + '" class="pageidx ' + (current == 1 ? "disabled" : "") + '" >上一页</li>';
 			if(pages.length) {
-				html += '<ul class="pagination-list"><li data-page="' + (current - 1) + '" class="pageidx ' + (current == 1 ? "disabled" : "") + '" >上一页</li>';
 				for(var i = 0, j = pages.length; i < j; i++) {
 					if(pages[i] == ellipsis) {
 						html += '<li class="ellipsis">' + ellipsis + '</li>'
@@ -80,8 +80,8 @@
 						html += '<li data-page="' + pages[i] + '" class="pageidx ' + (current == pages[i] ? "active" : "") + '">' + pages[i] + '</li>'
 					}
 				}
-				html += '<li data-page="' + (current - -1) + '" class="pageidx ' + (current == pageCount ? "disabled" : "") + '">下一页</li></ul>';
 			}
+			html += '<li data-page="' + (current - -1) + '" class="pageidx ' + (current == pageCount ? "disabled" : "") + '">下一页</li></ul>';
 			html += '<div class="pagination-total">总计' + total + '条</div></div>';
 
 			_dom.innerHTML = html;
